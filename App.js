@@ -107,7 +107,6 @@ const HeaderComponent = () => {
   );
 };
 
-
 // REACT element
 // const title = (
 //   <h1 id="title" key="h2">
@@ -156,4 +155,116 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 // console.log(heading);
 // Passing a react element inside the root
 // root.render(heading);
-root.render(<HeaderComponent2 />);
+// root.render(<HeaderComponent2 />);
+
+// Assignment
+const Sheader = React.createElement(
+  "div",
+  {
+    id: "container",
+    key: "div",
+  },
+  [
+    React.createElement(
+      "h1",
+      {
+        id: "title",
+        key: "h1",
+      },
+      "Namastey React"
+    ),
+    React.createElement(
+      "h1",
+      {
+        id: "title",
+        key: "h1",
+      },
+      "Namastey React"
+    ),
+    React.createElement(
+      "h1",
+      {
+        id: "title",
+        key: "h1",
+      },
+      "Namastey React"
+    ),
+  ]
+);
+
+// JSX , React element
+const S1header = (
+  <div id="container" key={"div"}>
+    <h1 id="title" key={"h1"}>
+      Namaste React
+    </h1>
+    <h1 id="title" key={"h1"}>
+      Namaste React
+    </h1>
+    <h1 id="title" key={"h1"}>
+      Namaste React
+    </h1>
+  </div>
+);
+
+// React Functional Component
+const S2header = () => (
+  <div id="container" key={"div"}>
+    <h1 id="title" key={"h1"}>
+      Namaste React
+    </h1>
+    <h1 id="title" key={"h1"}>
+      Namaste React
+    </h1>
+    <h1 id="title" key={"h1"}>
+      Namaste React
+    </h1>
+  </div>
+);
+
+const S3header = () => {
+  return (
+    <div id="container" key={"div"}>
+      <h1 id="title" key={"h1"}>
+        Namaste React 1
+      </h1>
+      <h1 id="title" key={"h1"}>
+        Namaste React 2
+      </h1>
+      <h1 id="title" key={"h1"}>
+        Namaste React 3
+      </h1>
+      <S2header />
+    </div>
+  );
+};
+
+const SHeaderComponent = () => (
+  <header>
+    <div className="header">
+      <img src="./sample_image.jpeg" alt="Header image" />
+      <h1>Marvels Avengers</h1>
+      <p>A place for all the marvel fans.</p>
+    </div>
+  </header>
+);
+
+const SS = () => {
+  return (
+    <header className="header">
+      <div className="logo">
+        <img src={require("./assets/sample_image.jpeg")} alt="Logo" />
+      </div>
+      <div className="search-bar">
+        <input type="text" placeholder="Search..." />
+        <button>Search</button>
+      </div>
+      <div className="user-icon">
+        <img src={require("./assets/sample_image.jpeg")} alt="User Icon" />
+      </div>
+    </header>
+  );
+};
+
+// root.render(<S3header />);
+root.render(<SS />);
