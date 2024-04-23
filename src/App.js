@@ -4,6 +4,11 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import { IMG_CDN_URL } from "./constants";
+import About from "./components/About";
+import Error from "./components/Error";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Contact from "./components/Contact";
+import RestaurantMenu from "./components/RestaurantMenu";
 
 // import { Title, Header } from "./components/Header";
 // import Header, { Title } from "./components/Header";
@@ -43,38 +48,38 @@ import { IMG_CDN_URL } from "./constants";
 
 // Config Driven UI
 
-const config = [
-  {
-    type: "carousel",
-    cards: [
-      {
-        offerName: "50% off",
-      },
-      {
-        offerName: "No Delivery Charge",
-      },
-    ],
-  },
-  {
-    type: "restaurants",
-    cards: [
-      {
-        name: "Burger King",
-        image:
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/e33e1d3ba7d6b2bb0d45e1001b731fcf",
-        cuisines: ["Burger", "American"],
-        rating: "4.2",
-      },
-      {
-        name: "Burger King",
-        image:
-          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/e33e1d3ba7d6b2bb0d45e1001b731fcf",
-        cuisines: ["Burger", "American"],
-        rating: "4.2",
-      },
-    ],
-  },
-];
+// const config = [
+//   {
+//     type: "carousel",
+//     cards: [
+//       {
+//         offerName: "50% off",
+//       },
+//       {
+//         offerName: "No Delivery Charge",
+//       },
+//     ],
+//   },
+//   {
+//     type: "restaurants",
+//     cards: [
+//       {
+//         name: "Burger King",
+//         image:
+//           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/e33e1d3ba7d6b2bb0d45e1001b731fcf",
+//         cuisines: ["Burger", "American"],
+//         rating: "4.2",
+//       },
+//       {
+//         name: "Burger King",
+//         image:
+//           "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/e33e1d3ba7d6b2bb0d45e1001b731fcf",
+//         cuisines: ["Burger", "American"],
+//         rating: "4.2",
+//       },
+//     ],
+//   },
+// ];
 
 // const restaurantList1 = [
 //   {
@@ -100,17 +105,45 @@ const config = [
 //   },
 // ];
 
-
-
 const AppLayout = () => {
   return (
     <>
       <Header />
-      <Body />
+      {/* Outlet */}
+      {/* Outlet will be filled by children configuration */}
+      <Outlet />
       <Footer />
     </>
   );
 };
+
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    // This is a wildcard match route
+    errorElement: <Error />,
+    // Now the about is child of AppLayout
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/restaurant/:resId",
+        element: <RestaurantMenu />,
+      },
+    ],
+  },
+]);
 
 // const jsx = (
 //     <div>
@@ -144,4 +177,5 @@ const AppLayout = () => {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<HeaderComponent />);
 // root.render(jsx);
-root.render(<AppLayout />);
+// root.render(<AppLayout />);
+root.render(<RouterProvider router={appRouter} />);
