@@ -9,6 +9,7 @@ import Error from "./components/Error";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
+import Profile from "./components/Profile";
 
 // import { Title, Header } from "./components/Header";
 // import Header, { Title } from "./components/Header";
@@ -132,6 +133,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+        children: [{
+          path: "profile",
+          element: <Profile />,
+        }]
       },
       {
         path: "/contact",

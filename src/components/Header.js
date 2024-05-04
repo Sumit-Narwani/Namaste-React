@@ -18,7 +18,7 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Will re-render this on change as react will re-render the whole component which has changed state
-  console.log("render()");
+  // console.log("render()");
   return (
     <div className="header">
       <Title />

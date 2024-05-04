@@ -4,7 +4,7 @@ import { swiggy_api_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 
-// Filter the restaurant data according input type
+// Filter the restaurant data according to input type
 function filterData(searchText, restaurants) {
   const resFilterData = restaurants.filter((restaurant) =>
     restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
