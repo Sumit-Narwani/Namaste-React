@@ -2,46 +2,15 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IMG_CDN_URL } from "../constants";
 import Shimmer from "./Shimmer";
+import useRestaurant from "../utils/useRestaurant";
 
 const RestaurantMenu = () => {
   // how to read a dynamic URL params
   const { resId } = useParams();
-  const [restaurant, setRestaurant] = useState(null);
-  const [menu, setMenu] = useState();
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
+  //   const [restaurant, setRestaurant] = useState(null);
+  //   const [menu, setMenu] = useState();
 
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=" +
-        resId
-    );
-    const json = await data.json();
-    console.log("JSON", json);
-    console.log(
-      "JSON",
-      json.data?.cards[2]?.card?.card?.info?.cloudinaryImageId
-    );
-
-    console.log(
-      json.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-        ?.card?.itemCards
-    );
-    setRestaurant(json.data?.cards[2]?.card?.card?.info);
-
-    setMenu(
-      json.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-        ?.card?.itemCards
-    );
-    console.log("menu", menu);
-  }
-
-  //   console.log(restaurant.ards[2]?.card?.card?.info?.?.cloudinaryImageId);
-  //   console.log(
-  //     "restaurant",
-  //     IMG_CDN_URL + restaurant?.cards[2]?.card?.card?.info?.id
-  //   );
+  const { restaurant, menu } = useRestaurant(resId);
 
   return !restaurant ? (
     <Shimmer />

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Logo from "../assets/unknown.jpg";
 import { Link } from "react-router-dom";
+import useOnline from "../utils/useOnline";
 
 // const loggerInUser = () => {
 //   // API call to check authentication
@@ -16,7 +17,7 @@ const Title = () => (
 const Header = () => {
   const [title, setTitle] = useState("Food Villa");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const isOnline = useOnline();
   // Will re-render this on change as react will re-render the whole component which has changed state
   // console.log("render()");
   return (
@@ -39,9 +40,14 @@ const Header = () => {
           <li>
             <Link to="/contact">Contact</Link>
           </li>
+
           <li>Cart</li>
+          <li>
+            <Link to="/instamart">Instamart</Link>
+          </li>
         </ul>
       </div>
+      <h1>{isOnline ? "✅" : "🔴"}</h1>
       {
         // JS Expression & Statement
         // ((a = 10), console.log(a))

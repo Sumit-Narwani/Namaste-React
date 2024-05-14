@@ -975,3 +975,6 @@ export const swiggy_api_URL =
 // Swiggy API to get Restaurant Menu data with foodfire erver
 export const swiggy_menu_api_URL =
   "https://foodfire.onrender.com/api/menu?page-type=REGULAR_MENU&complete-menu=true&lat=21.1702401&lng=72.83106070000001&&submitAction=ENTER&restaurantId=";
+
+export const FETCH_MENU =
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9715987&lng=77.5945627&restaurantId=";

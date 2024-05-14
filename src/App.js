@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM, { createRoot } from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,7 +10,8 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
-
+import Shimmer from "./components/Shimmer";
+// import Instamart from "./components/Instamart";
 // import { Title, Header } from "./components/Header";
 // import Header, { Title } from "./components/Header";
 
@@ -106,7 +107,21 @@ import Profile from "./components/Profile";
 //   },
 // ];
 
+// Chunking
+// Code Splitting
+// Dynamic Bundling
+// Lazy loading
+// On Demand Loading
+// Dynamic Import
+
+// always do lazy loading import at the top just like normal import statements
+const Instamart = lazy(() => import("./components/Instamart"));
+
+// Upon On Demand Loading -> upon render -> suspend loading
 const AppLayout = () => {
+  // this is wrong, never lazy load component inside component because it will lazy loaded everytime
+  // const Instamart = lazy(() => import("./components/Instamart"));
+
   return (
     <>
       <Header />
@@ -133,10 +148,12 @@ const appRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
-        children: [{
-          path: "profile",
-          element: <Profile />,
-        }]
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
       },
       {
         path: "/contact",
@@ -145,6 +162,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant/:resId",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <Instamart />
+          </Suspense>
+        ),
       },
     ],
   },

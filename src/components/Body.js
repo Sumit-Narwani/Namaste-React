@@ -3,14 +3,8 @@ import { useEffect, useState } from "react"; /* This is named export */
 import { swiggy_api_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-// Filter the restaurant data according to input type
-function filterData(searchText, restaurants) {
-  const resFilterData = restaurants.filter((restaurant) =>
-    restaurant?.info?.name.toLowerCase().includes(searchText.toLowerCase())
-  );
-  return resFilterData;
-}
+import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 // Body Component for body section: It contain all restaurant cards
 const Body = () => {
@@ -79,6 +73,14 @@ const Body = () => {
 
   // if allRestaurants is empty don't render restaurants cards
   // not render component (Early return)
+
+  // Custom Hook to check online/offline status
+  const isOnline = useOnline();
+
+  if (!isOnline) {
+    return <h1>Offline, please check your internet connection !!</h1>;
+  }
+
   if (!allRestaurants) return null;
 
   // Conditional Rendering
